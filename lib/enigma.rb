@@ -5,8 +5,7 @@ class Enigma
     key.each_cons(2) do |key_section|
       shifts << key_section.join.to_i
     end
-    keys = [:A, :B, :C, :D]
-    Hash[keys.zip(shifts)]
+    shifts
   end
 
   def offset_shifts(date)
@@ -14,25 +13,38 @@ class Enigma
     date = date * date
     date = date.to_s
     offset_string = date[-4..-1]
-    {
-      A: offset_string[0].to_i,
-      B: offset_string[1].to_i,
-      C: offset_string[2].to_i,
-      D: offset_string[3].to_i
-    }
+    [
+      offset_string[0].to_i,
+      offset_string[1].to_i,
+      offset_string[2].to_i,
+      offset_string[3].to_i
+    ]
   end
 
   def find_shifts(key, date)
-    shifts = {}
+    shifts = []
 
     keys = key_shifts(key)
     offsets = offset_shifts(date)
 
-    keys.each do |key_section, key_shift|
-      shifts[key_section] = key_shift + offsets[key_section]
+    keys.each_with_index do |key_shift, index|
+      shifts << key_shift + offsets[index]
     end
     shifts
   end
+
+  # def cipher(message, key, date)
+  #   shifts = find_shifts(key, date)
+  #   ciphered = ""
+  #   alphabet = ["a".."z"] << " "
+  #   message.split("").each_with_index do |letter, index|
+  #     key = index % 4 + 1
+  #     letter_index = alphabet.index(letter)
+  #     ciphered_index = shifts[key] + letter_index
+  #     ciphered << alphabet[ciphered_index]
+  #   end
+  #   ciphered
+  # end
 end
 
 

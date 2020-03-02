@@ -1,12 +1,17 @@
 class Enigma
+  attr_reader :alphabet
+
+  def initialize
+    @alphabet = ("a".."z").to_a << " "
+  end
+
   def key_shifts(key)
     shifts = []
     key = key.split("")
     key.each_cons(2) do |key_section|
       shifts << key_section.join.to_i
     end
-    keys = [:A, :B, :C, :D]
-    Hash[keys.zip(shifts)]
+    shifts
   end
 
   def offset_shifts(date)
@@ -14,24 +19,44 @@ class Enigma
     date = date * date
     date = date.to_s
     offset_string = date[-4..-1]
-    {
-      A: offset_string[0].to_i,
-      B: offset_string[1].to_i,
-      C: offset_string[2].to_i,
-      D: offset_string[3].to_i
-    }
+    [
+      offset_string[0].to_i,
+      offset_string[1].to_i,
+      offset_string[2].to_i,
+      offset_string[3].to_i
+    ]
   end
 
   def find_shifts(key, date)
-    shifts = {}
+    shifts = []
 
     keys = key_shifts(key)
     offsets = offset_shifts(date)
 
-    keys.each do |key_section, key_shift|
-      shifts[key_section] = key_shift + offsets[key_section]
+    keys.each_with_index do |key_shift, index|
+      shifts << key_shift + offsets[index]
     end
     shifts
+  end
+
+  def cipher(message, key, date, mode)
+    shifts = find_shifts(key, date)
+    ciphered = ""
+    message.split("").each_with_index do |letter, index|
+      ciphered << cipher_letter(letter, shifts, index, mode)
+    end
+    ciphered
+  end
+
+  def cipher_letter(letter, shifts, index, mode)
+    key = index % 4
+    letter_index = alphabet.index(letter)
+    if mode == :encrypt
+      ciphered_index = (letter_index + shifts[key]) % 27
+    elsif mode == :decrypt
+      ciphered_index = (letter_index - shifts[key]) % 27
+    end
+    alphabet[ciphered_index]
   end
 end
 

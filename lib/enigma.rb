@@ -42,18 +42,21 @@ class Enigma
   def cipher(message, key, date, mode)
     shifts = find_shifts(key, date)
     ciphered = ""
-    alphabet = ("a".."z").to_a << " "
     message.split("").each_with_index do |letter, index|
-      key = index % 4
-      letter_index = alphabet.index(letter)
-      if mode == :encrypt
-        ciphered_index = (letter_index + shifts[key]) % 27
-      elsif mode == :decrypt
-        ciphered_index = (letter_index - shifts[key]) % 27
-      end
-      ciphered << alphabet[ciphered_index]
+      ciphered << cipher_letter(letter, shifts, index, mode)
     end
     ciphered
+  end
+
+  def cipher_letter(letter, shifts, index, mode)
+    key = index % 4
+    letter_index = alphabet.index(letter)
+    if mode == :encrypt
+      ciphered_index = (letter_index + shifts[key]) % 27
+    elsif mode == :decrypt
+      ciphered_index = (letter_index - shifts[key]) % 27
+    end
+    alphabet[ciphered_index]
   end
 end
 

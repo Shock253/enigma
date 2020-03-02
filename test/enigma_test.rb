@@ -9,6 +9,11 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, enigma
   end
 
+  def test_has_attributes
+    enigma = Enigma.new
+    assert_equal ("a".."z").to_a << " ", enigma.alphabet
+  end
+
   def test_key_shifts
     enigma = Enigma.new
 

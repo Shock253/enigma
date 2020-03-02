@@ -58,6 +58,15 @@ class Enigma
     end
     alphabet[ciphered_index]
   end
+
+  def encrypt(message, key, date)
+    encrypted = cipher(message, key, date, :encrypt)
+    {
+      encryption: encrypted,
+      key: key,
+      date: date
+    }
+  end
 end
 
 

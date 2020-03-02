@@ -48,9 +48,10 @@ class EnigmaTest < Minitest::Test
     assert_equal shifts, enigma.find_shifts("12345", "03022020")
   end
 
-  # def test_can_cipher_message
-  #   enigma = Enigma.new
-  #
-  #   assert_equal "keder ohulw", enigma.cipher("hello world", "12345", "03022020")
-  # end
+  def test_can_cipher_message
+    enigma = Enigma.new
+
+    assert_equal "keder ohulw", enigma.cipher("hello world", "02715", "040895", :encrypt)
+    assert_equal "hello world", enigma.cipher("keder ohulw", "02715", "040895", :decrypt)
+  end
 end

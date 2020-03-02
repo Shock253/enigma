@@ -1,5 +1,17 @@
 class Enigma
+  def key_shifts(key)
+    shifts = []
+    key = key.split("")
+    key.each_cons(2) do |key_section|
+      shifts << key_section.join.to_i
+    end
+    keys = [:A, :B, :C, :D]
+    Hash[keys.zip(shifts)]
+  end
 
+  def offset_shifts(date)
+
+  end
 end
 
 

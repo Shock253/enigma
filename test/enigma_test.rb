@@ -124,7 +124,7 @@ class EnigmaTest < Minitest::Test
     date = "030220"
 
     decrypted = {
-      encryption: "hello world",
+      decryption: "hello world",
       key: "12345",
       date: "030220"
     }

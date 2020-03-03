@@ -12,4 +12,4 @@ encrypted_hash = enigma.encrypt(message)
 new_file.write(encrypted_hash[:encryption])
 new_file.close
 
-puts "Created '#{ARGV[0]}' with the key #{encrypted_hash[:key]} and date #{encrypted_hash[:date]}"
+puts "Created '#{ARGV[1]}' with the key #{encrypted_hash[:key]} and date #{encrypted_hash[:date]}"

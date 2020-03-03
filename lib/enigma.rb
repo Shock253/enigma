@@ -80,6 +80,15 @@ class Enigma
       date: date
     }
   end
+
+  def decrypt(message, key, date = default_date)
+    decrypted = cipher(message, key, date, :decrypt)
+    {
+      encryption: decrypted,
+      key: key,
+      date: date
+    }
+  end
 end
 
 

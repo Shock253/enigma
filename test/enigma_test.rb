@@ -115,4 +115,25 @@ class EnigmaTest < Minitest::Test
     assert_equal encrypted, enigma.encrypt(message, "12345")
     assert_equal encrypted, enigma.encrypt(message)
   end
+
+  def test_decryption
+    enigma = Enigma.new
+
+    message = "aesch cfklk"
+    key = "12345"
+    date = "030220"
+
+    decrypted = {
+      encryption: "hello world",
+      key: "12345",
+      date: "030220"
+    }
+
+    assert_equal decrypted, enigma.decrypt(message, key, date)
+
+    Date.stubs(:today).returns(Date.new(2020, 02, 03))
+
+    assert_equal decrypted, enigma.decrypt(message, key)
+
+  end
 end

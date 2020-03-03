@@ -1,4 +1,5 @@
 require_relative "modules/shiftable"
+require "date"
 
 class Enigma
   attr_reader :alphabet

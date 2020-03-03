@@ -72,7 +72,7 @@ class Enigma
     key
   end
 
-  def encrypt(message, key, date = default_date)
+  def encrypt(message, key = default_key, date = default_date)
     encrypted = cipher(message, key, date, :encrypt)
     {
       encryption: encrypted,

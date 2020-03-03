@@ -113,10 +113,6 @@ class EnigmaTest < Minitest::Test
     Random.stubs(:rand).returns(1, 2, 3, 4, 5)
 
     assert_equal encrypted, enigma.encrypt(message, "12345")
-    # assert_equal encrypted, enigma.encrypt(message)
-    #
-    # Date.stubs(:today).returns(Date.new(1995, 8, 4))
-    # Random.stubs(:rand).returns(1, 2, 3, 4, 5)
-
+    assert_equal encrypted, enigma.encrypt(message)
   end
 end

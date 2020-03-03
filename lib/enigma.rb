@@ -54,7 +54,7 @@ class Enigma
   def decrypt(message, key, date = default_date)
     decrypted = cipher(message, key, date, :decrypt)
     {
-      encryption: decrypted,
+      decryption: decrypted,
       key: key,
       date: date
     }

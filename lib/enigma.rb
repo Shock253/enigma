@@ -64,6 +64,14 @@ class Enigma
     date.strftime("%d%m%y")
   end
 
+  def default_key
+    key = ""
+    5.times do
+      key << Random.rand(0..9).to_s
+    end
+    key
+  end
+
   def encrypt(message, key, date = default_date)
     encrypted = cipher(message, key, date, :encrypt)
     {

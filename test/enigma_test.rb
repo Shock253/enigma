@@ -83,6 +83,19 @@ class EnigmaTest < Minitest::Test
     assert_equal "030220", enigma.default_date
   end
 
+  def test_default_key
+    enigma = Enigma.new
+
+    Random.stubs(:rand).returns(1, 2, 3, 4, 5)
+
+    assert_equal "12345", enigma.default_key
+
+    Random.stubs(:rand).returns(0, 0, 3, 4, 5)
+
+    assert_equal "00345", enigma.default_key
+
+  end
+
   def test_can_encrypt_and_default
     enigma = Enigma.new
 

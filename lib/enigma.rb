@@ -59,7 +59,12 @@ class Enigma
     alphabet[ciphered_index]
   end
 
-  def encrypt(message, key, date)
+  def default_date
+    date = Date.today
+    date.strftime("%d%m%y")
+  end
+
+  def encrypt(message, key, date = default_date)
     encrypted = cipher(message, key, date, :encrypt)
     {
       encryption: encrypted,
